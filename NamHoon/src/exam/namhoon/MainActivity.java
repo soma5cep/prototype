@@ -1,9 +1,9 @@
 package exam.namhoon;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.*;
+import android.support.v7.app.*;
+import android.view.*;
+import android.widget.*;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -11,6 +11,12 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
+		for(int i=0; i<5; ++i) {
+			RelativeLayout rel = (RelativeLayout)View.inflate(this, R.layout.relative_format, null);
+			linear.addView(rel);
+		}
 	}
 
 	@Override
