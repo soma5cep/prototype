@@ -24,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
 			}
 			if(i%2 == 0) {
 				//패딩을 재설정하는데 setBackground를 호출시 버그로 인해 XML에서 지정한 설정이 무시되기 때문이다.
+				//layer-list를 runtime에서 background로 설정시에 일어나는 문제인 듯 하다.
 				int left = rel.getPaddingLeft();
 				int top = rel.getPaddingTop();
 				int right =  rel.getPaddingRight();
@@ -32,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
 				rel.setPadding(left, top, right, bottom);
 			}
 			
-			linear.addView(rel);
+			linear.addView(rel, 0);
 		}
 	}
 
