@@ -1,0 +1,102 @@
+<!--  프로토 타입 스토리보드에 제안된 디자인중 PLAN B 이다 -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dip"
+    android:background="@drawable/view_underline"
+    >
+    
+    <!-- 시그널을 표현하는 텍스트뷰.
+    시그널은 윗라인을 차지하며, 윗라인의 글자크기는 15sp -->
+    <TextView
+        android:id="@+id/signal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="15sp"
+        android:text="default signal text"
+        />
+    <TextView
+        android:id="@+id/inout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/signal"
+        android:layout_alignParentTop="true"
+        android:textSize="15sp"
+        android:text=" 진입"
+        />
+    <TextView
+        android:id="@+id/stock_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/market_type"
+        android:layout_alignParentTop="true"
+        android:textSize="15sp"
+        android:text="삼성전자"
+        />
+    <TextView
+        android:id="@id/market_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/stock_name"
+        android:textSize="5sp"
+        android:text="주"
+        android:background="#FF0000"  
+        />
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signal"
+        android:layout_alignBaseline="@+id/stock_price"
+        android:textSize="10sp"
+        android:text="9/17 13:40"
+		/>
+    <TextView
+        android:id="@+id/price_diff_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/signal"
+        android:layout_alignBaseline="@id/stock_price"
+        android:textSize="10sp"
+        android:text=" (+1.59%)"
+        android:textColor="#FF0000"
+        />
+    <TextView
+        android:id="@+id/price_diff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/price_diff_percent"
+        android:layout_below="@id/signal"
+        android:layout_alignBaseline="@id/stock_price"
+        android:textSize="10sp"
+        android:text=" +2500 "
+        android:textColor="#FF0000"
+        />
+    <TextView
+        android:id="@+id/trading_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/price_diff"
+        android:layout_below="@id/signal"
+        android:layout_alignBaseline="@id/stock_price"
+        android:textSize="10sp"
+        android:text=" &lt;3250&gt; "
+        android:textColor="#BEBEBE"
+        />
+    <TextView
+        android:id="@id/stock_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/trading_volume"
+        android:layout_below="@id/signal"
+        android:textSize="13sp"
+        android:text=" 13,250 "
+        android:textStyle="bold"
+        />        
+</RelativeLayout>
