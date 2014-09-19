@@ -15,6 +15,12 @@ public class MainActivity extends ActionBarActivity {
 		LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
 		for(int i=0; i<5; ++i) {
 			RelativeLayout rel = (RelativeLayout)View.inflate(this, R.layout.relative_format, null);
+			
+			if(i==0) {
+				TextView text = (TextView)rel.findViewById(R.id.signal);
+				text.setText("5일 이평선 상향 돌파");
+			}
+			
 			linear.addView(rel);
 		}
 	}
