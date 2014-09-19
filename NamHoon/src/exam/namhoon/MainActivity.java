@@ -1,5 +1,7 @@
 package exam.namhoon;
 
+import android.content.res.*;
+import android.graphics.drawable.*;
 import android.os.*;
 import android.support.v7.app.*;
 import android.view.*;
@@ -19,6 +21,15 @@ public class MainActivity extends ActionBarActivity {
 			if(i==0) {
 				TextView text = (TextView)rel.findViewById(R.id.signal);
 				text.setText("5일 이평선 상향 돌파");
+			}
+			if(i%2 == 0) {
+				//패딩을 재설정하는데 setBackground를 호출시 버그로 인해 XML에서 지정한 설정이 무시되기 때문이다.
+				int left = rel.getPaddingLeft();
+				int top = rel.getPaddingTop();
+				int right =  rel.getPaddingRight();
+				int bottom = rel.getPaddingBottom();
+				rel.setBackgroundResource(R.drawable.view_underline_bkcolored);
+				rel.setPadding(left, top, right, bottom);
 			}
 			
 			linear.addView(rel);

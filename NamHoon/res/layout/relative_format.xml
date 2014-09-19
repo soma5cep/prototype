@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dip"
+    android:background="@drawable/view_underline"
     >
     
     <!-- 시그널을 표현하는 텍스트뷰.
