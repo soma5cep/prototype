@@ -17,11 +17,21 @@ public class MainActivity extends ActionBarActivity {
 		LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
 		for(int i=0; i<5; ++i) {
 			RelativeLayout rel = (RelativeLayout)View.inflate(this, R.layout.relative_format, null);
-			
+			RTSBox box = new RTSBox();
 			if(i==0) {
-				TextView text = (TextView)rel.findViewById(R.id.signal);
-				text.setText("5일 이평선 상향 돌파");
+				box.setSignal("20일 이평선 상향 돌파");
+				box.setInout("진입");
+				box.setStock_name("소마전자");
+				box.setMarket_type("주");
+				box.setTime("9/22 12:19");
+				box.setPrice_diff_percent("-11.5%");
+				box.setPrice_diff("-110");
+				box.setTrading_volume("6660");
+				box.setStock_price("882660");				
 			}
+			
+			ConvertRTSBox.convertBoxToRel(box, rel);
+			
 			if(i%2 == 0) {
 				//패딩을 재설정하는데 setBackground를 호출시 버그로 인해 XML에서 지정한 설정이 무시되기 때문이다.
 				//layer-list를 runtime에서 background로 설정시에 일어나는 문제인 듯 하다.
