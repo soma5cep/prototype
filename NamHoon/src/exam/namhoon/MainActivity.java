@@ -1,19 +1,54 @@
 package exam.namhoon;
 
-import android.content.res.*;
-import android.graphics.drawable.*;
+import java.util.*;
+
 import android.os.*;
+import android.support.v4.widget.*;
 import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
 
 public class MainActivity extends ActionBarActivity {
-
+	
+	
+	private ArrayList<RTSBox> items;
+	private ListViewAdapter adapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		items = new ArrayList<RTSBox>();
+		SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
+		swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				//서버로부터 정보를 받아와서 listview에 추가하는 코드 작성
+				
+				RTSBox box = new RTSBox();
+				box.setSignal("20일 이평선 상향 돌파");
+				box.setInout("진입");
+				box.setStock_name("소마전자");
+				box.setMarket_type("주");
+				box.setTime("9/22 12:19");
+				box.setPrice_diff_percent("-11.5%");
+				box.setPrice_diff("-110");
+				box.setTrading_volume("6660");
+				box.setStock_price("882660");
+				items.add(box);
+				adapter.notifyDataSetChanged();
+
+			}	
+		
+		});
+		//swipeLayout 칼라 지정하는 코드가 있는데 사용고려
+		
+		
+		ListView lv = (ListView)findViewById(R.id.mlist);
+		lv.setAdapter(adapter = new ListViewAdapter(this, R.layout.relative_format, items));
+		
+		
+		/*
 		LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
 		for(int i=0; i<5; ++i) {
 			RelativeLayout rel = (RelativeLayout)View.inflate(this, R.layout.relative_format, null);
@@ -45,6 +80,7 @@ public class MainActivity extends ActionBarActivity {
 			
 			linear.addView(rel, 0);
 		}
+		*/
 	}
 
 	@Override

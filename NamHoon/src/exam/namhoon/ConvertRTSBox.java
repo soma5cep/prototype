@@ -6,6 +6,7 @@ import android.text.style.*;
 import android.widget.*;
 
 public class ConvertRTSBox {
+	static int count = 0;
 	static void setRelSignal(String str, RelativeLayout rel) {
 		//null일때 return 하면 relative는 수정되지 않고 relative_format.xml 파일에 정의된
 		//default message로 출력된다.
@@ -162,7 +163,7 @@ public class ConvertRTSBox {
 		text.setText(" "+str+" ");
 	}
 	
-	public static RelativeLayout convertBoxToRel(RTSBox box, RelativeLayout rel) {
+	public static void convertBoxToRel(RTSBox box, RelativeLayout rel) {
 		setRelSignal(box.getSignal(), rel);
 		setRelInout(box.getInout(), rel);
 		setRelStock_name(box.getStock_name(), rel);
@@ -173,7 +174,16 @@ public class ConvertRTSBox {
 		setRelTrading_volume(box.getTrading_volume(), rel);
 		setRelStock_price(box.getStock_price(), rel);
 		
-		return rel;		
+		if((++count)%2 == 0) {
+			//패딩을 재설정하는데 setBackground를 호출시 버그로 인해 XML에서 지정한 설정이 무시되기 때문이다.
+			//layer-list를 runtime에서 background로 설정시에 일어나는 문제인 듯 하다.
+			int left = rel.getPaddingLeft();
+			int top = rel.getPaddingTop();
+			int right =  rel.getPaddingRight();
+			int bottom = rel.getPaddingBottom();
+			rel.setBackgroundResource(R.drawable.view_underline_bkcolored);
+			rel.setPadding(left, top, right, bottom);
+		}
 	}
 
 }
