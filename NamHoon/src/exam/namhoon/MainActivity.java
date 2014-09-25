@@ -7,6 +7,7 @@ import android.support.v4.widget.*;
 import android.support.v7.app.*;
 import android.view.*;
 import android.widget.*;
+import android.widget.AbsListView.OnScrollListener;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -19,6 +20,19 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		items = new ArrayList<RTSBox>();
+		for(int i=0; i<10; ++i) {
+			RTSBox box = new RTSBox();
+			box.setSignal("10일 이평선 상향 돌파");
+			box.setInout("진입");
+			box.setStock_name("소마전자");
+			box.setMarket_type("KOSPI");
+			box.setTime("9/22 12:19");
+			box.setPrice_diff_percent("-11.5%");
+			box.setPrice_diff("-110");
+			box.setTrading_volume("6660");
+			box.setStock_price("882660");
+			items.add(box);
+		}
 		SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
 		swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
@@ -29,24 +43,58 @@ public class MainActivity extends ActionBarActivity {
 				box.setSignal("20일 이평선 상향 돌파");
 				box.setInout("진입");
 				box.setStock_name("소마전자");
-				box.setMarket_type("주");
+				box.setMarket_type("KOSPI");
 				box.setTime("9/22 12:19");
 				box.setPrice_diff_percent("-11.5%");
 				box.setPrice_diff("-110");
 				box.setTrading_volume("6660");
 				box.setStock_price("882660");
-				items.add(box);
+				items.add(0, box);
 				adapter.notifyDataSetChanged();
-
 			}	
-		
 		});
 		//swipeLayout 칼라 지정하는 코드가 있는데 사용고려
 		
 		
-		ListView lv = (ListView)findViewById(R.id.mlist);
+		ListView lv = (ListView)findViewById(R.id.mlist);	
+		View footer = View.inflate(this, R.layout.list_footer, null);
+		lv.addFooterView(footer);
+		
 		lv.setAdapter(adapter = new ListViewAdapter(this, R.layout.relative_format, items));
 		
+		
+		//리무브 왜하는지 테스트하기
+		//lv.removeFooterView(footer);
+		
+		lv.setOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				//Do nothing
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				int count = totalItemCount - visibleItemCount;
+				
+				// 예제코드에서는 락이 잡혀있는지에 대한 코드도 있다.
+				// 락 여부와 threading 하는 것을 차후 고려
+				// 딜레이를 걸어놓지 않았기 때문에 겁나 그냥 빨리 뜸. footer를 볼 수 없을 정도
+				if(firstVisibleItem >= count && totalItemCount != 0) {
+					RTSBox box = new RTSBox();
+					box.setSignal("5일 이평선 상향 돌파");
+					box.setInout("진입");
+					box.setStock_name("소마전자");
+					box.setMarket_type("KOSPI");
+					box.setTime("9/22 12:19");
+					box.setPrice_diff_percent("-11.5%");
+					box.setPrice_diff("-110");
+					box.setTrading_volume("6660");
+					box.setStock_price("882660");
+					items.add(box);
+					adapter.notifyDataSetChanged();
+				}
+			}
+		});
 		
 		/*
 		LinearLayout linear = (LinearLayout)findViewById(R.id.linear);

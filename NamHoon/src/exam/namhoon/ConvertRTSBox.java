@@ -1,3 +1,6 @@
+// 이부분의 내용은 ListViewAdapter로 넣었다.
+
+/*
 package exam.namhoon;
 
 import android.graphics.*;
@@ -110,9 +113,8 @@ public class ConvertRTSBox {
 		if(str == null) {
 			return;
 		}
-		/* 마켓 타입에 대해 prototype에서는 주식 외에 다른것은 없으므로
-		 * 주식으로 되어있는 default 그대로 사용한다.
-		 */
+		TextView text = (TextView)rel.findViewById(R.id.market_type);
+		text.setText(" "+str+" ");
 	}
 	static void setRelTime(String str, RelativeLayout rel) {
 		if(str == null) {
@@ -173,17 +175,29 @@ public class ConvertRTSBox {
 		setRelPrice_diff(box.getPrice_diff(), rel);
 		setRelTrading_volume(box.getTrading_volume(), rel);
 		setRelStock_price(box.getStock_price(), rel);
+//	
+//		if((++count)%2 == 0) {
+//			//패딩을 재설정하는데 setBackground를 호출시 버그로 인해 XML에서 지정한 설정이 무시되기 때문이다.
+//			//layer-list를 runtime에서 background로 설정시에 일어나는 문제인 듯 하다.
+//			int left = rel.getPaddingLeft();
+//			int top = rel.getPaddingTop();
+//			int right =  rel.getPaddingRight();
+//			int bottom = rel.getPaddingBottom();
+//			rel.setBackgroundResource(R.drawable.view_underline_bkcolored);
+//			rel.setPadding(left, top, right, bottom);
+//		}
+//		else {
+//			//패딩을 재설정하는데 setBackground를 호출시 버그로 인해 XML에서 지정한 설정이 무시되기 때문이다.
+//			//layer-list를 runtime에서 background로 설정시에 일어나는 문제인 듯 하다.
+//			int left = rel.getPaddingLeft();
+//			int top = rel.getPaddingTop();
+//			int right =  rel.getPaddingRight();
+//			int bottom = rel.getPaddingBottom();
+//			rel.setBackgroundResource(R.drawable.view_underline);
+//			rel.setPadding(left, top, right, bottom);
+//		}
 		
-		if((++count)%2 == 0) {
-			//패딩을 재설정하는데 setBackground를 호출시 버그로 인해 XML에서 지정한 설정이 무시되기 때문이다.
-			//layer-list를 runtime에서 background로 설정시에 일어나는 문제인 듯 하다.
-			int left = rel.getPaddingLeft();
-			int top = rel.getPaddingTop();
-			int right =  rel.getPaddingRight();
-			int bottom = rel.getPaddingBottom();
-			rel.setBackgroundResource(R.drawable.view_underline_bkcolored);
-			rel.setPadding(left, top, right, bottom);
-		}
+		
 	}
-
 }
+*/

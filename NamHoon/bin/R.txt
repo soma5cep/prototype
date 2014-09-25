@@ -270,7 +270,7 @@ int id image 0x7f050027
 int id inout 0x7f050040
 int id listMode 0x7f050001
 int id list_item 0x7f050029
-int id market_type 0x7f050042
+int id market_type 0x7f050044
 int id middle 0x7f050012
 int id mlist 0x7f05003d
 int id never 0x7f050009
@@ -299,11 +299,11 @@ int id showTitle 0x7f050006
 int id signal 0x7f05003f
 int id split_action_bar 0x7f05001e
 int id stock_name 0x7f050041
-int id stock_price 0x7f050044
+int id stock_price 0x7f050043
 int id submit_area 0x7f050039
 int id swipe_container 0x7f05003c
 int id tabMode 0x7f050002
-int id time 0x7f050043
+int id time 0x7f050042
 int id title 0x7f05002b
 int id top_action_bar 0x7f050020
 int id trading_volume 0x7f050047
@@ -336,8 +336,9 @@ int layout abc_search_dropdown_item_icons_2line 0x7f030015
 int layout abc_search_view 0x7f030016
 int layout abc_simple_decor 0x7f030017
 int layout activity_main 0x7f030018
-int layout relative_format 0x7f030019
-int layout support_simple_spinner_dropdown_item 0x7f03001a
+int layout list_footer 0x7f030019
+int layout relative_format 0x7f03001a
+int layout support_simple_spinner_dropdown_item 0x7f03001b
 int menu main 0x7f0c0000
 int string abc_action_bar_home_description 0x7f0a0001
 int string abc_action_bar_up_description 0x7f0a0002
