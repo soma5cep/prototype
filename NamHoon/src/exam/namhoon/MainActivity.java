@@ -20,7 +20,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		items = new ArrayList<RTSBox>();
-		for(int i=0; i<10; ++i) {
+		/*for(int i=0; i<10; ++i) {
 			RTSBox box = new RTSBox();
 			box.setSignal("10일 이평선 상향 돌파");
 			box.setInout("진입");
@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
 			box.setTrading_volume("6660");
 			box.setStock_price("882660");
 			items.add(box);
-		}
+		}*/
 		SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
 		swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
@@ -45,15 +45,17 @@ public class MainActivity extends ActionBarActivity {
 				String[][] data = connect.messageGet(limit, after, before);
 				
 				for(int i=0;i<limit;i++){
-					box[i].setSignal(data[i][1]);
-					box[i].setInout("진입");
-					box[i].setStock_name(data[i][0]);
-					box[i].setMarket_type("KOSPI	");
+					box[i].setSignal(data[i][2]);
+					if(data[i][5]=="0") box[i].setInout("진입");
+					else box[i].setInout("이탈");
+					box[i].setStock_name(data[i][1]);
+					if(data[i][6]=="1") box[i].setMarket_type("KOSPI     ");
+					else box[i].setMarket_type("KOSDAC     ");
 					box[i].setTime(data[i][3]);
 					box[i].setPrice_diff_percent("-11.5%");
 					box[i].setPrice_diff("-110");
 					box[i].setTrading_volume(data[i][4]);
-					box[i].setStock_price(data[i][2]);
+					box[i].setStock_price(data[i][0]);
 					items.add(0, box[i]);
 					adapter.notifyDataSetChanged();
 				}

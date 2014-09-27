@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 			JSONObject json = new JSONObject(pRecvServerPage);
 			JSONArray jArr = json.getJSONArray("List");   // 여기에 뭐가 들어가야하는겆...?
 			Log.i("check","되었다");
-			String[] jsonName = {"id","name","price","time","volume"};
+			String[] jsonName = {"price", "item_name", "name", "date", "volume", "entered", "id", "market"};
 			String[][] parseredData = new String[jArr.length()][jsonName.length];
 			for(int i=0;i<jArr.length();i++){
 				json = jArr.getJSONObject(i);
