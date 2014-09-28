@@ -15,6 +15,8 @@ import android.view.*;
 import android.widget.*;
 import android.widget.AbsListView.OnScrollListener;
 
+import com.google.gson.*;
+
 public class MainActivity extends ActionBarActivity {
 	
 	
@@ -87,7 +89,52 @@ public class MainActivity extends ActionBarActivity {
 						result = EntityUtils.toString(resEntityGet);
 					}
 				} catch (Exception e) {}
-				Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+				//Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+				
+				
+				
+				Gson gson = new Gson();
+				
+				List<SignalItem> signals = gson.fromJson(result, SignalItemList.class).getSignals();
+				SignalItem item = signals.get(0);
+				
+				
+				//테스트용 토스트
+				/*
+				if(item == null) {
+					Toast.makeText(MainActivity.this, "item is null", Toast.LENGTH_SHORT).show();
+				}
+				else {
+					Toast.makeText(MainActivity.this, item.getItem_name(), Toast.LENGTH_SHORT).show();
+				}
+				*/
+
+				
+				RTSBox box = new RTSBox();
+				
+				box.setSignal(item.getName());
+				if(item.getEntered() == 1) {
+					box.setInout("진입");
+				}
+				else if(item.getEntered() == 0) {
+					box.setInout("이탈");
+				}
+				box.setStock_name(item.getItem_name());
+				if(item.getMarket() == 1) {
+					box.setMarket_type("KOSPI");
+				}
+				else if(item.getMarket() == 2) {
+					box.setMarket_type("KOSDAQ");
+				}
+				box.setTime(item.getDate());
+				box.setPrice_diff_percent("-11.5%d");
+				box.setPrice_diff("-110d");
+				box.setTrading_volume(String.valueOf(item.getVolume()));
+				box.setStock_price(String.valueOf(item.getPrice()));
+				box.setId(item.getId());
+				
+				items.add(0, box);
+				adapter.notifyDataSetChanged();
 				/*
 				for(int i=0;i<1;i++){
 					box[i].setSignal(data[i][2]);

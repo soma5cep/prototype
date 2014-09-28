@@ -12,6 +12,7 @@ public class RTSBox {
 	private String trading_volume;
 	private String stock_price;
 	
+	private int id;
 	
 	//기본 생성자 호출하면 null로 초기화
 	//아마 초기화 안해도 자동으로 null로 초기화 될테지만 명확히 하기위해 추가
@@ -26,9 +27,9 @@ public class RTSBox {
 		price_diff = null;
 		trading_volume = null;
 		stock_price = null;
+		id = 0;
 	}
-	
-	
+
 	//자동으로 생성시킨 getter setter by eclipse
 	public String getSignal() {
 		return signal;
@@ -83,6 +84,12 @@ public class RTSBox {
 	}
 	public void setStock_price(String stock_price) {
 		this.stock_price = stock_price;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
