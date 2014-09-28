@@ -2,6 +2,12 @@ package exam.namhoon;
 
 import java.util.*;
 
+import org.apache.http.*;
+import org.apache.http.client.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.impl.client.*;
+import org.apache.http.util.*;
+
 import android.os.*;
 import android.support.v4.widget.*;
 import android.support.v7.app.*;
@@ -19,8 +25,18 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		
+		/*아래 두줄의 코드는 테스트의 편의를 위해 MainThread에서 네트워크 통신을 하기 위함이다.
+		 * 네트워크 통신이나 File I/O 작업은 MainThread가 아닌 새로운 Thread에서 작업해야 하며,
+		 * Loader, AsyncTask, AsyncQueryHandler, HandlerThread 등을 사용하면 된다.
+		 */
+		
+		/*원래 minSdkVersion은 8이었다. 하지만 아래의 기능을 사용하기 우해 minSdkVersion을 9로 올림. AndroidManifest.xml*/
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();		 
+		StrictMode.setThreadPolicy(policy);
+		
 		items = new ArrayList<RTSBox>();
-		for(int i=0; i<10; ++i) {
+		/*for(int i=0; i<10; ++i) {
 			RTSBox box = new RTSBox();
 			box.setSignal("10일 이평선 상향 돌파");
 			box.setInout("진입");
@@ -32,25 +48,64 @@ public class MainActivity extends ActionBarActivity {
 			box.setTrading_volume("6660");
 			box.setStock_price("882660");
 			items.add(box);
-		}
+		}*/
 		SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
 		swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
 				//서버로부터 정보를 받아와서 listview에 추가하는 코드 작성
 				
-				RTSBox box = new RTSBox();
-				box.setSignal("20일 이평선 상향 돌파");
-				box.setInout("진입");
-				box.setStock_name("소마전자");
-				box.setMarket_type("KOSPI");
-				box.setTime("9/22 12:19");
-				box.setPrice_diff_percent("-11.5%");
-				box.setPrice_diff("-110");
-				box.setTrading_volume("6660");
-				box.setStock_price("882660");
-				items.add(0, box);
-				adapter.notifyDataSetChanged();
+				//int limit=1, after=-1, before=-1;
+				//RTSBox[] box = new RTSBox[500];
+				/*
+				ConnectServer connect = new ConnectServer();
+				String[][] data = connect.messageGet(limit, after, before);
+				*/
+				
+				/* 서버 통신 예제 코드
+				 * 
+				 */
+				String result = "default message";
+				//ConnectServer cs = new ConnectServer();
+				//String[][] data = cs.jsonParserList(result);
+				try {
+					HttpClient client = new DefaultHttpClient();
+					String getURL = "http://14.63.165.145:5000/signals?limit=1";
+					HttpGet get = new HttpGet(getURL);
+					HttpResponse responseGet = client.execute(get);
+					HttpEntity resEntityGet = responseGet.getEntity();
+					if(resEntityGet != null) {
+						
+						//결과처리코드
+						/*
+						BufferedReader bufreader = new BufferedReader(new InputStreamReader(resEntityGet.getContent(), "utf-8"));
+						String line = null;
+						while((line = bufreader.readLine()) != null) {
+							result += line;
+						}
+						*/
+						result = EntityUtils.toString(resEntityGet);
+					}
+				} catch (Exception e) {}
+				Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+				/*
+				for(int i=0;i<1;i++){
+					box[i].setSignal(data[i][2]);
+					if(data[i][5]=="0") box[i].setInout("진입");
+					else box[i].setInout("이탈");
+					box[i].setStock_name(data[i][1]);
+					if(data[i][6]=="1") box[i].setMarket_type("KOSPI     ");
+					else box[i].setMarket_type("KOSDAC     ");
+					box[i].setTime(data[i][3]);
+					box[i].setPrice_diff_percent("-11.5%");
+					box[i].setPrice_diff("-110");
+					box[i].setTrading_volume(data[i][4]);
+					box[i].setStock_price(data[i][0]);
+					items.add(0, box[i]);
+					adapter.notifyDataSetChanged();
+				}
+				*/
+				
 			}	
 		});
 		//swipeLayout 칼라 지정하는 코드가 있는데 사용고려

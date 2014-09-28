@@ -16,6 +16,7 @@ public class RTSBox {
 	//기본 생성자 호출하면 null로 초기화
 	//아마 초기화 안해도 자동으로 null로 초기화 될테지만 명확히 하기위해 추가
 	public RTSBox() {
+		
 		signal = null;
 		inout = null;
 		stock_name = null;

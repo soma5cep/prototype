@@ -231,6 +231,8 @@ public class ListViewAdapter extends ArrayAdapter<RTSBox> {
 			setPrice_diff(box.getPrice_diff(), vh.price_diff);
 			setTrading_volume(box.getTrading_volume(), vh.trading_volume);
 			setStock_price(box.getStock_price(), vh.stock_price);
+			
+			/*아래 코드는 디자인적인 부분. 배경을 설정한다. */
 			/*
 			if((++count)%2 == 0) {
 				//패딩을 재설정하는데 setBackground를 호출시 버그로 인해 XML에서 지정한 설정이 무시되기 때문이다.
