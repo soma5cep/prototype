@@ -223,7 +223,7 @@ public class ListViewAdapter extends ArrayAdapter<RTSBox> {
 		
 		public static void convertBoxToRel(RTSBox box, ViewHolder vh) {
 			setSignal(box.getSignal(), vh.signal);
-			setInout(box.getInout(), vh.inout);
+			setInout(box.getInout() + box.getId(), vh.inout);
 			setStock_name(box.getStock_name(), vh.stock_name);
 			setMarket_type(box.getMarket_type(), vh.market_type);
 			setTime(box.getTime(), vh.time);
@@ -258,15 +258,4 @@ public class ListViewAdapter extends ArrayAdapter<RTSBox> {
 			
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
